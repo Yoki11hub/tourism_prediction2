@@ -18,7 +18,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          python tourism_project/model_building/data_register.py
+          python model_building/data_register.py
 
   data-prep:
     needs: register-dataset
@@ -33,7 +33,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          python tourism_project/model_building/prep.py
+          python model_building/prep.py
 
   model-training:
     runs-on: ubuntu-latest
@@ -48,7 +48,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          python tourism_project/model_building/train_and_log_models.py
+          python model_building/train_and_log_models.py
 
   deploy-hosting:
     runs-on: ubuntu-latest
@@ -63,4 +63,4 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          python tourism_project/deployment/host.py
+          python deployment/host.py
