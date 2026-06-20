@@ -1,13 +1,11 @@
-
 name: Tourism Project Pipeline
 
 on:
   push:
     branches:
-      - main  # Automatically triggers on push to the main branch
+      - main
 
 jobs:
-
   register-dataset:
     runs-on: ubuntu-latest
     steps:
@@ -37,7 +35,6 @@ jobs:
         run: |
           python tourism_project/model_building/prep.py
 
-
   model-training:
     runs-on: ubuntu-latest
     needs: data-prep
@@ -53,10 +50,9 @@ jobs:
         run: |
           python tourism_project/model_building/train_and_log_models.py
 
-
   deploy-hosting:
     runs-on: ubuntu-latest
-    needs: [model-training,data-prep,register-dataset]
+    needs: [model-training, data-prep, register-dataset]
     steps:
       - uses: actions/checkout@main
       - name: Install Dependencies
